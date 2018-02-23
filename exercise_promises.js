@@ -14,8 +14,8 @@ function getMostFollowers(...usernames) {
 // re-write as an asynchronous function
 async function getMostFollowers(...usernames){
 	// stays the same/
-	let baseUrl = 'https://api.github.com/users';
-	let url = usernames.map(username => $.getJSON(baseUrl + username));
+	let baseUrl = 'https://api.github.com/users/';
+	let urls = usernames.map(username => $.getJSON(baseUrl + username));
 	// creates a variable to hold all the results from the Promise
 	let results = await Promise.all(urls);
 	// once results finishes, sorts data to find largest, returns string
