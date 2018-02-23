@@ -11,6 +11,18 @@ function getMostFollowers(...usernames) {
 	});
 }
 
+// re-write as an asynchronous function
+async function getMostFollowers(...usernames){
+	// stays the same/
+	let baseUrl = 'https://api.github.com/users';
+	let url = usernames.map(username => $.getJSON(baseUrl + username));
+	// creates a variable to hold all the results from the Promise
+	let results = await Promise.all(urls);
+	// once results finishes, sorts data to find largest, returns string
+	let max = results.sort((a,b) => a.followers < b.followers)[0];
+	return `${max.name} has the most followers with ${max.followers}`;
+}
+
 function starWarsString(id) {
 	// to hold all string additions
 	var str = '';
