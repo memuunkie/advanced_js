@@ -48,3 +48,21 @@ function starWarsString(id) {
 		return finalString;
 	});
 }
+
+async function starWarsString(id) {
+	// remains the same
+	let str = '';
+	// instead of just returning, api calls saved to variable with 'await'
+	let results = await $.getJSON(`https://swapi.co/api/people/${id}`);
+	str += `${results.name} is featured in `;
+	let movies = results.films[0];
+	// instead of .then(), using 'await'
+	let moreResults = await $.getJSON(movies);
+	str += `${moreResults.title}, directed by ${moreResults.director} `;
+	let planetData = moreResults.planets[0];
+	let finalResults = await $.getJSON(planetData);
+	str += `and it takes place on ${finalResults.name}`;
+	return str;
+}
+
+// sidenote: console results are slightly different during Promise wait time.
