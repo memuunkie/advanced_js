@@ -1,1 +1,1 @@
-# execises_adv_js
+# exercises_adv_js
